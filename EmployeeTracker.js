@@ -19,7 +19,7 @@ var inquirer = require("inquirer");
 
 //   // Your password
 //   password: "&Fuckyou1!",
-//   database: "top_songsdb"
+//   database: "cms"
 // });
 
 // connection.connect(function(err) {
@@ -53,7 +53,13 @@ inquirer
       } else if (x === 'View employees') {
         console.log('show employess DB');
       } else if (x === 'Add departments') {
-        
+        //
+      } else if (x === 'Add roles') {
+          //
+      } else if (x === 'Add employees') {
+          //
+      } else if (x === 'Update employee roles') {
+
       }
 
      
