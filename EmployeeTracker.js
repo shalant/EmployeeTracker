@@ -1,7 +1,7 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 const { allowedNodeEnvironmentFlags } = require("process");
-const cTable = require('console.table');
+require('console.table');
 //this folder and code does not exist yet
 //var Role = require('./models')
 //var newRole = new Role({
@@ -10,27 +10,27 @@ const cTable = require('console.table');
 //})
 
 
-var connection = mysql.createConnection({
-  host: "localhost",
-  // Your port; if not 3306
-  port: 3306,
-  // Your username
-  user: "root",
-  // Your password
-  password: "&Fuckyou1!",
-  database: "cms"
-});
+// var connection = mysql.createConnection({
+//   host: "localhost",
+//   // Your port; if not 3306
+//   port: 3306,
+//   // Your username
+//   user: "root",
+//   // Your password
+//   password: "&Fuckyou1!",
+//   database: "cms"
+// });
 
-connection.connect(function(err) {
-  if (err) throw err;
-  function depDisplay() {
-    SELECT * FROM cms.department;
-  };
-});
+// connection.connect(function(err) {
+//   if (err) throw err;
+//   function depDisplay() {
+//     "SELECT * FROM cms.department";
+//   };
+// });
 
-
-inquirer
-  .prompt([
+function beginning() {
+  inquirer
+    .prompt([
       {
         type:'list',
         name: 'actionChoice',
@@ -40,8 +40,8 @@ inquirer
 
       //getting the information to do those things
     /* Pass your questions in here */
-  ])
-  .then(answers => {
+    ])
+    .then(answers => {
       var x = answers.actionChoice
       if (x === 'View departments') {
         console.log('show the department database');
@@ -61,24 +61,40 @@ inquirer
       } else if (x === 'Update employee roles') {
         updateEmployeeRoles();
       }
-
-    function displayDepartments {
-      connection.query(mysql, function (err, res) {
+    });
+  }
+    function displayDepartments() {
+      console.log("display departments")
+      connection.query("SELECT * FROM departments", function (err, res) {
         if (err) throw err;
-        console.log(res)
-      }
+        console.table(res);
+        beginning();
+      })
+    }
 
-    function displayRoles {}
+    function displayRoles() {
+      connection.query("SELECT * FROM roles"), function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        beginning();
+      })
+    }
 
-    function displayEmployees {}
+    function displayEmployees() {
+      connection.query("SELECT * FROM employee"), function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        beginning();
+      })
+    }
 
-    function addDepartments {}
+    function addDepartments() {}
 
-    function addRoles {}
+    function addRoles() {}
 
-    function addEmployees {}
+    function addEmployees() {}
 
-    function updateEmployeeRoles {}
+    function updateEmployeeRoles() {}
 
 
       console.log(answers)
