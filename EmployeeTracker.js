@@ -1,5 +1,7 @@
-//var mysql = require("mysql");
+var mysql = require("mysql");
 var inquirer = require("inquirer");
+const { allowedNodeEnvironmentFlags } = require("process");
+const cTable = require('console.table');
 //this folder and code does not exist yet
 //var Role = require('./models')
 //var newRole = new Role({
@@ -8,28 +10,24 @@ var inquirer = require("inquirer");
 //})
 
 
-// var connection = mysql.createConnection({
-//   host: "localhost",
+var connection = mysql.createConnection({
+  host: "localhost",
+  // Your port; if not 3306
+  port: 3306,
+  // Your username
+  user: "root",
+  // Your password
+  password: "&Fuckyou1!",
+  database: "cms"
+});
 
-//   // Your port; if not 3306
-//   port: 3306,
+connection.connect(function(err) {
+  if (err) throw err;
+  function depDisplay() {
+    SELECT * FROM cms.department;
+  };
+});
 
-//   // Your username
-//   user: "root",
-
-//   // Your password
-//   password: "&Fuckyou1!",
-//   database: "cms"
-// });
-
-// connection.connect(function(err) {
-//   if (err) throw err;
-//   someFunction();
-// });
-
-
-//First inquirer prompt: What shall we do? (How will I structure this?)
-// Add departments, roles, employees
 
 inquirer
   .prompt([
@@ -44,25 +42,43 @@ inquirer
     /* Pass your questions in here */
   ])
   .then(answers => {
-        var x = answers.actionChoice
-
+      var x = answers.actionChoice
       if (x === 'View departments') {
         console.log('show the department database');
+        displayDepartments();
       } else if (x === 'View roles') {
         console.log('show the roles database');
+        displayRoles();
       } else if (x === 'View employees') {
         console.log('show employess DB');
+        displayEmployees();
       } else if (x === 'Add departments') {
-        //
+        addDepartments();
       } else if (x === 'Add roles') {
-          //
+        addRoles();
       } else if (x === 'Add employees') {
-          //
+        addEmployees();
       } else if (x === 'Update employee roles') {
-
+        updateEmployeeRoles();
       }
 
-     
+    function displayDepartments {
+      connection.query(mysql, function (err, res) {
+        if (err) throw err;
+        console.log(res)
+      }
+
+    function displayRoles {}
+
+    function displayEmployees {}
+
+    function addDepartments {}
+
+    function addRoles {}
+
+    function addEmployees {}
+
+    function updateEmployeeRoles {}
 
 
       console.log(answers)
