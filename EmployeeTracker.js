@@ -10,25 +10,23 @@ require('console.table');
 //})
 
 
-// var connection = mysql.createConnection({
-//   host: "localhost",
-//   // Your port; if not 3306
-//   port: 3306,
-//   // Your username
-//   user: "root",
-//   // Your password
-//   password: "&Fuckyou1!",
-//   database: "cms"
-// });
+var connection = mysql.createConnection({
+  host: "localhost",
+  // Your port; if not 3306
+  port: 3306,
+  // Your username
+  user: "root",
+  // Your password
+  password: "&Fuckyou1!",
+  database: "cms"
+});
 
-// connection.connect(function(err) {
-//   if (err) throw err;
-//   function depDisplay() {
-//     "SELECT * FROM cms.department";
-//   };
-// });
+connection.connect(function(err) {
+  if (err) throw err;
+  questions();
+});
 
-function beginning() {
+function questions() {
   inquirer
     .prompt([
       {
@@ -68,7 +66,7 @@ function beginning() {
       connection.query("SELECT * FROM departments", function (err, res) {
         if (err) throw err;
         console.table(res);
-        beginning();
+        questions();
       })
     }
 
@@ -76,23 +74,85 @@ function beginning() {
       connection.query("SELECT * FROM roles"), function (err, res) {
         if (err) throw err;
         console.table(res);
-        beginning();
+        questions();
       })
-    }
+    };
 
     function displayEmployees() {
       connection.query("SELECT * FROM employee"), function (err, res) {
         if (err) throw err;
         console.table(res);
-        beginning();
+        questions();
       })
-    }
+    };
 
-    function addDepartments() {}
+    function addDepartments() {
+      var query = connection.query(
+          "INSERT INTO department SET ?",
+          {inquirer.prompt
+            type:'input',
+            name: 'newDepartment',
+            message:'Type a department?'
+          },
+          function(err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + "product inserted!\n");
+          }
+      )
+    };
+    
 
-    function addRoles() {}
+    //from iceCreamCRUD.js
+    
+    // function createProduct() {
+    //   console.log("Inserting a new product...\n");
+    //   var query = connection.query(
+    //     "INSERT INTO products SET ?",
+    //     {
+    //       flavor: "Rocky Road",
+    //       price: 3.0,
+    //       quantity: 50
+    //     },
+    //     function(err, res) {
+    //       if (err) throw err;
+    //       console.log(res.affectedRows + " product inserted!\n");
+    //       // Call updateProduct AFTER the INSERT completes
+    //       updateProduct();
+    //     }
+    //   );
+
+   
+    function addRoles() {
+      var query = connection.query(
+          "INSERT INTO roles SET ?",
+          {inquirer.prompt
+            type:'input',
+            name: 'newRole',
+            message:'Type a role?'
+          },
+          function(err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + "product inserted!\n");
+          }
+      )
+    };
 
     function addEmployees() {}
+
+    function addEmployees() {
+      var query = connection.query(
+          "INSERT INTO employee SET ?",
+          {inquirer.prompt
+            type:'input',
+            name: 'newEmployee',
+            message:'Type an employee's name?'
+          },
+          function(err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + "product inserted!\n");
+          }
+      )
+    };
 
     function updateEmployeeRoles() {}
 
