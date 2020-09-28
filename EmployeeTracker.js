@@ -33,7 +33,7 @@ function questions() {
         type:'list',
         name: 'actionChoice',
         message:'What would you like to do?',
-        choices:['View departments', 'View roles', 'View employess', 'Add departments', 'Add roles', 'Add employess', 'Update employee roles']
+        choices:['View departments', 'View roles', 'View employees', 'Add departments', 'Add roles', 'Add employess', 'Update employee roles']
       }
 
       //getting the information to do those things
@@ -60,15 +60,16 @@ function questions() {
         updateEmployeeRoles();
       }
     });
-  }
+  };
+
     function displayDepartments() {
       console.log("display departments")
       connection.query("SELECT * FROM departments", function (err, res) {
         if (err) throw err;
         console.table(res);
         questions();
-      })
-    }
+      });
+    };
 
     function displayRoles() {
       connection.query("SELECT * FROM roles"), function (err, res) {
