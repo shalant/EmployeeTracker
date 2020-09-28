@@ -4,6 +4,7 @@
   "description": "",
   "main": "EmployeeTracker.js",
   "dependencies": {
+    "console-table-printer": "^2.4.10",
     "inquirer": "^7.3.3",
     "mysql": "^2.18.1"
   },

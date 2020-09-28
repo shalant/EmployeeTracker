@@ -100,7 +100,8 @@ function questions() {
           function(err, res) {
             if (err) throw err;
             console.log(res.affectedRows + "product inserted!\n");
-            }
+            },
+      questions();
     };
     
 
@@ -135,8 +136,9 @@ function questions() {
           function(err, res) {
             if (err) throw err;
             console.log(res.affectedRows + "product inserted!\n");
-          }
+          },
       )
+      questions();
     };
 
      function addEmployees() {
@@ -150,17 +152,18 @@ function questions() {
           function(err, res) {
             if (err) throw err;
             console.log(res.affectedRows + "product inserted!\n");
-          }
+          },
       )
+      questions();
     };
 
-    function updateEmployeeRoles() {}
-
+    //function updateEmployeeRoles() {}
+    //i don't know how to do this!
 
       console.log(answers)
       //those things
     // Use user feedback for... whatever!!
-  })
+  
   .catch(error => {
     if(error.isTtyError) {
       // Prompt couldn't be rendered in the current environment
