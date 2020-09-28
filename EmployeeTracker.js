@@ -75,7 +75,7 @@ function questions() {
         if (err) throw err;
         console.table(res);
         questions();
-      })
+      };
     };
 
     function displayEmployees() {
@@ -83,22 +83,24 @@ function questions() {
         if (err) throw err;
         console.table(res);
         questions();
-      })
+      };
     };
 
     function addDepartments() {
       var query = connection.query(
           "INSERT INTO department SET ?",
-          {inquirer.prompt
-            type:'input',
-            name: 'newDepartment',
-            message:'Type a department?'
+          {
+            inquirer
+              .prompt ([
+              type: 'input',
+              name: 'newDepartment',
+              message:'Type a department?'
+              ]),
           },
           function(err, res) {
             if (err) throw err;
             console.log(res.affectedRows + "product inserted!\n");
-          }
-      )
+            }
     };
     
 
@@ -137,9 +139,7 @@ function questions() {
       )
     };
 
-    function addEmployees() {}
-
-    function addEmployees() {
+     function addEmployees() {
       var query = connection.query(
           "INSERT INTO employee SET ?",
           {inquirer.prompt
